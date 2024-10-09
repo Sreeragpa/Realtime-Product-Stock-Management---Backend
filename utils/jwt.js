@@ -12,4 +12,13 @@ const JwtSign = async(payload)=>{
     }
 }
 
-module.exports = {JwtSign}  
+const JwtVerify = async(token)=>{
+    try {
+        const payload = await jwt.verify(token,secret);
+        return payload
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+module.exports = {JwtSign,JwtVerify}  
