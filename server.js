@@ -2,7 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv")
 const cors = require("cors")
 const adminRouter = require("./routers/admin.route")
-const managerRouter = require("./routers/managerRoute")
+const managerRouter = require("./routers/manager.route")
+const productRouter = require("./routers/product.route")
 const connectDb= require("./utils/dbConnect")
 
 
@@ -22,6 +23,7 @@ app.use(express.json())
 // Routes
 app.use('/admin',adminRouter)
 app.use('/manager',managerRouter)
+app.use('/product',productRouter)
 
 
 

@@ -13,10 +13,13 @@ const login = async(req,res)=>{
         if(!user){
             return res.status(404).json("User not found");
         }
+        const isManager = (user.role==="manager")?true:false;
+
+        if(!isManager)   return res.status(403).json("Access denied.");
 
         const comparedPassword = await bcrypt.compare(password,user.password);
 
-        console.log(user,user._id,user.password,comparedPassword);
+       
         
         if(comparedPassword){
             const payLoad = {
@@ -29,7 +32,7 @@ const login = async(req,res)=>{
             }
             res.status(200).json({status:"success",data:token})
         }else{
-            return res.status(404).json("Invalid Password");
+            return res.status(401).json("Invalid Password");
         }
     } catch (error) {
         console.log(error);
