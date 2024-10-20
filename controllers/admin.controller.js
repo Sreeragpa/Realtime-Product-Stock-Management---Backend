@@ -17,9 +17,10 @@ const adminLogin = async (req,res)=>{
         const comparedPassword = (user.password===password)?true:false
         const isAdmin = (user.role==="admin")?true:false;
 
-        
+        if(!isAdmin) return res.status(403).json("Access denied.");
 
-        if(comparedPassword && isAdmin){
+
+        if(comparedPassword){
             const payLoad = {
                 role:"admin",
                 email:email

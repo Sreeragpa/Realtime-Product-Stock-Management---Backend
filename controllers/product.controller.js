@@ -1,4 +1,5 @@
-const productModel = require("../models/productModel")
+const productModel = require("../models/productModel");
+const {getSocketInstance} = require("../configs/socketio")
 
 const addProduct = async(req,res,next)=>{
     try {
@@ -16,7 +17,10 @@ const addProduct = async(req,res,next)=>{
 
         const savedProduct = await newProduct.save();
 
+        const io = getSocketInstance();
+        io.emit("product-added",savedProduct)
         res.status(200).json({status:"success",data:savedProduct})
+
 
 
     } catch (error) {
@@ -37,7 +41,11 @@ const deleteProduct = async (req,res,next)=>{
     try {
         const {id} = req.params;
         const products = await productModel.findByIdAndDelete(id);
-         res.status(200).json({status:"success",data:products})
+
+        const io = getSocketInstance();
+        io.emit("product-deleted",products)
+        
+        res.status(200).json({status:"success",data:products})
     } catch (error) {
         console.log(error);
     }
