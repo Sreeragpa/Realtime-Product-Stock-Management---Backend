@@ -6,9 +6,9 @@ This is the backend of a **Product Stock Management** application, built using *
 
 - **JWT-based Authentication**: Secure authentication with role-based access control.
 - **Role-based Authorization**:
-  - **Admin**: Can manage all users and products.
+  - **Admin**: Can manage all users .
   - **Manager**: Can view and manage products.
-  - **Store Manager**: Can view product stock updates.
+  - **Store Manager**: Can view and manage products.
 - **Product Management**:
   - Add new products.
   - Edit existing products.
@@ -26,7 +26,6 @@ This is the backend of a **Product Stock Management** application, built using *
 ## Installation
 
 ### Step 1: Clone the Repository
-
-```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+### Step 2: Add .env file
+PORT=3000
+jwtsecret="secret"
